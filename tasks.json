@@ -1,0 +1,17 @@
+{
+    "args": [
+                "-std=c++17",
+                "-fdiagnostics-color=always",
+                "-Wall",
+                "-g",
+                "-I${workspaceFolder}/include",
+                "-L${workspaceFolder}/lib",
+                "${workspaceFolder}/src/glad.c",
+                "${workspaceFolder}/src/*.cpp",
+                "${workspaceFolder}/lib/libglfw.3.dylib",
+                "-o",
+                "${workspaceFolder}/main.exe",
+                "-framework",
+                "OpenGL"
+            ]
+}            
