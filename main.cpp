@@ -1,46 +1,53 @@
-#include <cstdio>
-#include <../include/GLFW3/glfw3.h>
+//
+// Created by Fyn Deubner on 19.03.26.
+//
 
-typedef void(*GLFWerrorfun)(int, const char *);
-
-int nHeight = 640;
-int nWidth = 480;
-const char* pTitle = "Space Invaders";
+#include <GLFW3/glfw3.h>
 
 GLFWwindow* m_pWindow;
+int m_nHeight = 480;
+int m_nWidth = 640;
+const char* m_pcTitle = "Space Invaders";
 
 void error_callback(int error, const char* description)
 {
-    fprintf(stderr, "Error: %s\n", description);
+    printf("Error: %s\n", description);
 }
 
-int CreateWindow (int nHeight, int nWidth, const char* pTitle) {
-    m_pWindow = glfwCreateWindow (nWidth, nHeight, pTitle, NULL, NULL);
-    if (!m_pWindow) {
+int main()
+{
+
+    GLFWwindow* window;
+
+
+    /* Initialize the library */
+    if (!glfwInit())
+        return -1;
+
+    /* Create a windowed mode window and its OpenGL context */
+    window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
+    if (!window)
+    {
         glfwTerminate();
         return -1;
     }
 
-    return 1;
-}
+    /* Make the window's context current */
+    glfwMakeContextCurrent(window);
 
-int Setup() {
-    int nResult = -1;
-    glfwSetErrorCallback(error_callback);
+    /* Loop until the user closes the window */
+    while (!glfwWindowShouldClose(window))
+    {
+        /* Render here */
+        glClear(GL_COLOR_BUFFER_BIT);
 
-    if (glfwInit()) {
-        nResult = 1;
+        /* Swap front and back buffers */
+        glfwSwapBuffers(window);
+
+        /* Poll for and process events */
+        glfwPollEvents();
     }
 
-    return nResult;
-}
-
-int main () {
-    if (Setup() < 1)
-        return -1;
-
-    if (CreateWindow(nWidth, nHeight, pTitle) < 1)
-        return -1;
-
-    glfwMakeContextCurrent(m_pWindow);
+    glfwTerminate();
+    return 0;
 }
