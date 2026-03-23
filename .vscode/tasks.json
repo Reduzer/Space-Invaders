@@ -14,6 +14,7 @@
                 "-L${workspaceFolder}/dependencies/library",
                 "${workspaceFolder}/main.cpp",
                 "${workspaceFolder}/dependencies/library/libglfw.3.4.dylib",
+                "${workspaceFolder}/dependencies/library/libGLEW.2.3.1.dylib",
                 "-o",
                 "${workspaceFolder}/app",
                 "-framework",
