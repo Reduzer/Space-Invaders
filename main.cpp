@@ -3,6 +3,7 @@
 //
 
 #include <cstdio>
+#include <cstdint>
 #include <glew/glew.h>
 #include <glfw/glfw3.h>
 
@@ -10,6 +11,24 @@ GLFWwindow* window;
 int Height = 480;
 int Width = 640;
 const char* Title = "Space Invaders";
+
+
+struct Buffer {
+    size_t width, height;
+    uint32_t* data;
+
+    uint32_t rgbToUInt32(uint8_t red, uint8_t green, uint8_t blue){
+        return (red << 24) | (green << 16) | (blue << 8) | 255;
+    }
+};
+
+void buffer_clear(Buffer* buffer, uint32_t color)
+{
+    for(size_t i = 0; i < buffer->width * buffer->height; ++i)
+    {
+        buffer->data[i] = color;
+    }
+}
 
 void error_callback(int error, const char* description)
 {
